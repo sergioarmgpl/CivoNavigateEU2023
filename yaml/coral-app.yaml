@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: coral-app
+spec:
+  containers:
+  - image: sergioarmgpl/coral-python:v1
+    name: coral-python
+    imagePullPolicy: Always
+    securityContext:
+      privileged: true
+      capabilities:
+        add: ["SYS_ADMIN"]
+    volumeMounts:
+    - mountPath: /dev
+      name: dev-volume
+  volumes:
+  - name: dev-volume
+    hostPath:
+      path: /dev
+      type: Directory
